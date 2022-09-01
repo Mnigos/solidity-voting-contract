@@ -44,6 +44,10 @@ contract Voting {
     proposals.push(Proposal({name: proposalName, voteCount: 0}));
   }
 
+  function getAvaibleVotes() public view returns (uint256 avaibleVotes) {
+    avaibleVotes = voters[msg.sender].weight;
+  }
+
   function getWinningProposalIndex()
     public
     view
