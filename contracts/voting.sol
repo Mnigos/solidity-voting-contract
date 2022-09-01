@@ -15,14 +15,16 @@ contract Voting {
   }
 
   address public chairPerson;
+  uint256 public defaultVoterWeight;
 
   mapping(address => Voter) public voters;
 
   Proposal[] public proposals;
 
-  constructor(string[] memory proposalNames, uint256 defaultVoterWeigth) {
+  constructor(string[] memory proposalNames, uint256 _defaultVoterWeight) {
     chairPerson = msg.sender;
-    voters[chairPerson].weight = defaultVoterWeigth;
+    defaultVoterWeight = _defaultVoterWeight;
+    voters[chairPerson].weight = defaultVoterWeight;
 
     for (uint256 index = 0; index < proposalNames.length; index++) {
       proposals.push(Proposal({name: proposalNames[index], voteCount: 0}));
@@ -42,6 +44,13 @@ contract Voting {
 
   function addProposal(string memory proposalName) public {
     proposals.push(Proposal({name: proposalName, voteCount: 0}));
+  }
+
+  function addVoter() public {
+    require(!voters[msg.sender].voted, "The voter already voted.");
+    require(voters[msg.sender].weight == 0);
+
+    voters[msg.sender].weight = defaultVoterWeight;
   }
 
   function getAvaibleVotes() public view returns (uint256 avaibleVotes) {
@@ -75,7 +84,11 @@ contract Voting {
     winningProposalName = proposals[getWinningProposalIndex()].name;
   }
 
-  function getWinningProposalVoteCount() public view returns (uint256 winningVoteCount) {
+  function getWinningProposalVoteCount()
+    public
+    view
+    returns (uint256 winningVoteCount)
+  {
     winningVoteCount = proposals[getWinningProposalIndex()].voteCount;
   }
 }
