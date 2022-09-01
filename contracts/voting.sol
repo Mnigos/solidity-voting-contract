@@ -66,4 +66,8 @@ contract Voting {
   {
     winningProposalName = proposals[getWinningProposalIndex()].name;
   }
+
+  function getWinningProposalVoteCount() public view returns (uint256 winningVoteCount) {
+    winningVoteCount = proposals[getWinningProposalIndex()].voteCount;
+  }
 }
