@@ -5,6 +5,7 @@ pragma solidity >=0.7.0 <0.9.0;
 contract Voting {
   struct Voter {
     bool voted;
+    uint256 weight;
     uint256 vote;
   }
 
@@ -19,8 +20,9 @@ contract Voting {
 
   Proposal[] public proposals;
 
-  constructor(string[] memory proposalNames) {
+  constructor(string[] memory proposalNames, uint256 defaultVoterWeigth) {
     chairPerson = msg.sender;
+    voters[chairPerson].weight = defaultVoterWeigth;
 
     for (uint256 index = 0; index < proposalNames.length; index++) {
       proposals.push(Proposal({name: proposalNames[index], voteCount: 0}));
@@ -29,12 +31,13 @@ contract Voting {
 
   function vote(uint256 proposal) public {
     Voter storage sender = voters[msg.sender];
+    require(sender.weight != 0, "Has no right to vote");
     require(!sender.voted, "Already voted");
 
     sender.voted = true;
     sender.vote = proposal;
 
-    proposals[proposal].voteCount += 1;
+    proposals[proposal].voteCount += sender.weight;
   }
 
   function getWinningProposalIndex()
