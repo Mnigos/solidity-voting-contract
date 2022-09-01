@@ -40,6 +40,10 @@ contract Voting {
     proposals[proposal].voteCount += sender.weight;
   }
 
+  function addProposal(string memory proposalName) public {
+    proposals.push(Proposal({name: proposalName, voteCount: 0}));
+  }
+
   function getWinningProposalIndex()
     public
     view
