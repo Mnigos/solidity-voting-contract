@@ -46,6 +46,11 @@ contract Voting {
     proposals.push(Proposal({name: proposalName, voteCount: 0}));
   }
 
+  function removeProposal(uint256 proposalIndex) public {
+    proposals[proposalIndex] = proposals[proposals.length - 1];
+    proposals.pop();
+  }
+
   function addVoter() public {
     require(!voters[msg.sender].voted, "The voter already voted.");
     require(voters[msg.sender].weight == 0);
