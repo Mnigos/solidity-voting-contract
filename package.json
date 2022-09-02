@@ -8,7 +8,9 @@
     "prepare": "husky install",
     "lint": "solhint \"contracts/**/*.sol\"",
     "lint:fix": "solhint \"contracts/**/*.sol\" --fix",
-    "format": "prettier --write \"contracts/**/*.sol\""
+    "format": "prettier --write \"contracts/**/*.sol\"",
+    "compile": "truffle compile",
+    "deploy:ropsten": "truffle deploy --network ropsten"
   },
   "lint-staged": {
     "*.sol": "solhint \"contracts/**/*.sol\" --fix && prettier --write \"contracts/**/*.sol\""
@@ -22,5 +24,10 @@
     "prettier": "^2.7.1",
     "prettier-plugin-solidity": "^1.0.0-beta.24",
     "solhint": "^3.3.7"
+  },
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.0.14",
+    "dotenv": "^16.0.2",
+    "truffle": "^5.5.28"
   }
 }
