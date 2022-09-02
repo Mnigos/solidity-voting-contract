@@ -10,7 +10,7 @@
     "lint:fix": "solhint \"contracts/**/*.sol\" --fix",
     "format": "prettier --write \"contracts/**/*.sol\"",
     "compile": "truffle compile",
-    "deploy:ropsten": "truffle deploy --network ropsten"
+    "deploy:ropsten": "truffle migrate --network ropsten"
   },
   "lint-staged": {
     "*.sol": "solhint \"contracts/**/*.sol\" --fix && prettier --write \"contracts/**/*.sol\""
