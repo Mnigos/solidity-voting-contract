@@ -50,7 +50,7 @@ jobs:
         run: yarn lint:sol
 
       - name: Run tests 🧪
-        run: yarn test:coverage
+        run: npm test
 
       - name: Collect coverage
         uses: codecov/codecov-action@v3
