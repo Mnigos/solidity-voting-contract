@@ -7,3 +7,4 @@ migrations
 .coverage_contracts
 coverage
 coverage.json
+.eslintcache
