@@ -11,9 +11,13 @@
     "format": "prettier --write \"contracts/**/*.sol\"",
     "compile": "truffle compile",
     "deploy:ropsten": "tsc -p ./tsconfig.migrate.json --outDir ./migrations && truffle migrate --network ropsten",
+    "deploy:development": "tsc -p ./tsconfig.migrate.json --outDir ./migrations && truffle migrate --network development",
     "generate-types": "typechain --target=truffle-v5 'build/contracts/*.json'",
     "typecheck": "truffle compile && yarn generate-types && tsc --noEmit",
-    "postinstall": "yarn generate-types"
+    "postinstall": "yarn generate-types",
+    "test": "truffle run test",
+    "test:watch": "truffle run test --watch",
+    "test:coverage": "truffle run coverage"
   },
   "lint-staged": {
     "*.sol": "solhint \"contracts/**/*.sol\" --fix && prettier --write \"contracts/**/*.sol\""
@@ -31,6 +35,7 @@
     "prettier": "^2.7.1",
     "prettier-plugin-solidity": "^1.0.0-beta.24",
     "solhint": "^3.3.7",
+    "solidity-coverage": "0.8.0-beta.1",
     "ts-node": "^10.9.1"
   },
   "dependencies": {
