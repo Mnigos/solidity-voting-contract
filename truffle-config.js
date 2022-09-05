@@ -1,7 +1,8 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider')
 require('dotenv/config')
-
-console.log(process.env.MNEMONIC)
+require('ts-node').register({
+  files: true,
+})
 
 module.exports = {
   networks: {
@@ -13,7 +14,7 @@ module.exports = {
         )
       },
       network_id: '3',
-      gas: 4_000_000,
+      gas: 3_000_000,
       from: process.env.CHAIR_PERSON,
     },
   },
