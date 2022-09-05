@@ -3,3 +3,7 @@ node_modules
 build
 types
 migrations
+.coverage_artifacts
+.coverage_contracts
+coverage
+coverage.json

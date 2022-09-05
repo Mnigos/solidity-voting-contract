@@ -17,10 +17,16 @@ module.exports = {
       gas: 3_000_000,
       from: process.env.CHAIR_PERSON,
     },
+    development: {
+      host: '127.0.0.1',
+      port: 8545,
+      network_id: '*',
+    },
   },
   compilers: {
     solc: {
       version: '^0.8.0',
     },
   },
+  plugins: ['solidity-coverage'],
 }
