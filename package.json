@@ -13,12 +13,12 @@
     "format": "prettier --write \"contracts/**/*.sol\"",
     "compile": "hardhat compile",
     "deploy:goerli": "hardhat run scripts/deploy.ts",
-    "generate-types": "typechain --target=truffle-v5 'build/contracts/*.json'",
+    "generate-types": "hardhat typechain",
     "typecheck": "hardhat compile && yarn generate-types && tsc --noEmit",
     "postinstall": "yarn generate-types",
-    "test": "hardhat test",
-    "test:watch": "hardhat watch test",
-    "test:coverage": "hardhat coverage"
+    "test": "hardhat test --network hardhat",
+    "test:watch": "hardhat watch test --network hardhat",
+    "test:coverage": "hardhat coverage --network hardhat"
   },
   "lint-staged": {
     "*.sol": "solhint \"contracts/**/*.sol\" --fix && prettier --write \"contracts/**/*.sol\"",
@@ -29,6 +29,8 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@commitlint/types": "^17.0.0",
     "@nomiclabs/hardhat-ethers": "^2.1.1",
+    "@typechain/ethers-v5": "^10.1.0",
+    "@typechain/hardhat": "^6.1.2",
     "@types/bn.js": "^5.1.1",
     "@types/chai": "^4.3.3",
     "@types/mocha": "^9.1.1",
