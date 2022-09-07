@@ -11,9 +11,8 @@
     "lint:sol": "solhint \"contracts/**/*.sol\"",
     "lint:js": "eslint --ext \".js,.ts,.md,.jsx,.tsx,.mdx\" --ignore-path .gitignore .",
     "format": "prettier --write \"contracts/**/*.sol\"",
-    "compile": "truffle compile",
-    "deploy:ropsten": "tsc -p ./tsconfig.migrate.json --outDir ./migrations && truffle migrate --network ropsten",
-    "deploy:development": "tsc -p ./tsconfig.migrate.json --outDir ./migrations && truffle migrate --network development",
+    "compile": "hardhat compile",
+    "deploy:goerli": "hardhat run scripts/deploy.ts",
     "generate-types": "typechain --target=truffle-v5 'build/contracts/*.json'",
     "typecheck": "truffle compile && yarn generate-types && tsc --noEmit",
     "postinstall": "yarn generate-types",
@@ -59,11 +58,8 @@
     "ts-node": "^10.9.1"
   },
   "dependencies": {
-    "@truffle/hdwallet-provider": "^2.0.14",
-    "@typechain/truffle-v5": "^8.0.1",
     "dotenv": "^16.0.2",
     "hardhat": "^2.11.0",
-    "truffle": "^5.5.28",
     "typechain": "^8.1.0",
     "typescript": "^4.8.2"
   }
