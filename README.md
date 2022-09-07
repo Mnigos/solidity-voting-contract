@@ -15,7 +15,9 @@
 
 ![Web3.js](https://img.shields.io/badge/web3.js-F16822?style=for-the-badge&logo=web3.js&logoColor=white)
 ![Blockchain](https://img.shields.io/badge/Blockchain.com-121D33?logo=blockchaindotcom&logoColor=fff&style=for-the-badge)
-![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white)
+
+![Commitlint](https://img.shields.io/badge/commitlint-000000.svg?style=for-the-badge&logo=commitlint&logoColor=white)
+![ConventionalCommits](https://img.shields.io/badge/Conventional%20Commits-FE5196.svg?style=for-the-badge&logo=Conventional-Commits&logoColor=white)
 
 ![ESLint](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
 ![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
@@ -23,6 +25,8 @@
 ![Mocha](https://img.shields.io/badge/-mocha-%238D6748?style=for-the-badge&logo=mocha&logoColor=white)
 ![Chai](https://img.shields.io/badge/chai-A30701?style=for-the-badge&logo=chai&logoColor=white)
 
+![.ENV](https://img.shields.io/badge/.ENV-ECD53F.svg?style=for-the-badge&logo=dotenv&logoColor=black)
+![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white)
 ![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 
 ## Description
@@ -45,40 +49,40 @@ $ yarn
 
 ```bash
 # lint javascript/typescript files
-$ lint:js
+$ yarn lint:js
 
 # lint solidity files
-$ lint:sol
+$ lyarn int:sol
 
 # lint all files
-$ lint
+$ yarn lint
 
 # lint and fix all files
-$ lint:fix
+$ yarn lint:fix
 
 # format solidity files
-$ format
+$ yarn format
 ```
 
 ## Testing
 
 ```bash
 # run tests
-$ test
+$ yarn test
 
 # run tests in watch mode
-$ test:watch
+$ yarn test:watch
 
 # run tests with coverage
-$ test:coverage
+$ yarn test:coverage
 ```
 
 ## Deploy
 
 ```bash
 # compile contracts
-$ compile
+$ yarn compile
 
 # deploy contract to kovan test network
-$ deploy:kovan
+$ yarn deploy:kovan
 ```
