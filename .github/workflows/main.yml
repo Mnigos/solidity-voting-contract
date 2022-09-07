@@ -52,7 +52,7 @@ jobs:
         run: yarn lint:sol
 
       - name: Run tests 🧪
-        run: npm test
+        run: yarn test:coverage
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
 
