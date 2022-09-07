@@ -1,93 +1,108 @@
-const voting = artifacts.require('Voting')
-/*
- * uncomment accounts to access the test accounts made available by the
- * Ethereum client
- * See docs: https://www.trufflesuite.com/docs/truffle/testing/writing-tests-in-javascript
- */
-contract('Voting', accounts => {
-  it('should assert true', async () => {
-    await voting.deployed()
-    return assert.isTrue(true)
+import { ethers } from 'hardhat'
+import '@nomiclabs/hardhat-ethers'
+import { expect } from 'chai'
+
+async function setup(proposals = ['p1', 'p2'], defaultVoterWeight = 1) {
+  const [deployer] = await ethers.getSigners()
+
+  const Voting = await ethers.getContractFactory('Voting', deployer)
+  const voting = await Voting.deploy(proposals, defaultVoterWeight)
+
+  return {
+    deployer,
+    voting,
+    proposals,
+    defaultVoterWeight,
+  }
+}
+
+describe('Voting', () => {
+  it('should not be undefined', async () => {
+    const { voting } = await setup()
+
+    expect(voting).to.not.be.undefined
   })
 
-  it('should have 2 avaible votes', async () => {
-    const votingInstance = await voting.deployed()
+  it('should have avaible votes', async () => {
+    const { voting, defaultVoterWeight } = await setup()
 
-    const avaibleVotes = +(await votingInstance.getAvaibleVotes())
+    const avaibleVotes = +(await voting.getAvaibleVotes())
 
-    assert.equal(avaibleVotes, 2)
+    expect(avaibleVotes).to.equal(defaultVoterWeight)
   })
 
   it('should vote', async () => {
-    const votingInstance = await voting.deployed()
+    const { voting, deployer } = await setup()
 
-    await votingInstance.vote(0)
+    await voting.vote(0)
 
-    const voterInfo = await votingInstance.voters(accounts[0])
+    const [voterInfo] = await voting.voters(deployer.address)
 
-    assert.equal(voterInfo[0], true)
+    expect(voterInfo).to.be.true
   })
 
   it('should add proposal', async () => {
-    const votingInstance = await voting.deployed()
+    const { voting } = await setup()
 
-    await votingInstance.addProposal('p3')
+    await voting.addProposal('p3')
 
-    const newProposal = await votingInstance.proposals(2)
+    const [newProposalName] = await voting.proposals(2)
 
-    assert.equal(newProposal[0], 'p3')
+    expect(newProposalName).to.equal('p3')
   })
 
   it('should get winning proposal index', async () => {
-    const votingInstance = await voting.deployed()
+    const { voting } = await setup()
 
-    const winningProposalIndex =
-      +(await votingInstance.getWinningProposalIndex())
+    const winningProposalIndex = +(await voting.getWinningProposalIndex())
 
-    assert.equal(winningProposalIndex, 0)
+    expect(winningProposalIndex).to.equal(0)
   })
 
   it('winning proposal name should match index', async () => {
-    const votingInstance = await voting.deployed()
+    const { voting } = await setup()
 
-    const winningProposalIndex =
-      +(await votingInstance.getWinningProposalIndex())
+    const winningProposalIndex = +(await voting.getWinningProposalIndex())
 
-    const winningProposalName = await votingInstance.getWinningProposalName()
+    const winningProposalName = await voting.getWinningProposalName()
 
-    const proposal = await votingInstance.proposals(winningProposalIndex)
+    const [proposalName] = await voting.proposals(winningProposalIndex)
 
-    assert.equal(proposal[0], winningProposalName)
+    expect(proposalName).to.equal(winningProposalName)
   })
 
   it('winning proposal should have proper amount of votes', async () => {
-    const votingInstance = await voting.deployed()
+    const { voting } = await setup()
+
+    await voting.vote(0)
 
     const winningProposalVoteCount =
-      +(await votingInstance.getWinningProposalVoteCount())
+      +(await voting.getWinningProposalVoteCount())
 
-    assert.equal(winningProposalVoteCount, 2)
+    expect(winningProposalVoteCount).to.equal(1)
   })
 
   it('should have no avaible votes', async () => {
-    const votingInstance = await voting.new(['p1', 'p2'], 2, {
-      from: accounts[1],
-    })
+    const { voting } = await setup()
+    const [, secondAccount] = await ethers.getSigners()
 
-    const avaibleVotes = +(await votingInstance.getAvaibleVotes())
+    const avaibleVotes = +(await voting
+      .connect(secondAccount)
+      .getAvaibleVotes())
 
-    assert.equal(avaibleVotes, 0)
+    expect(avaibleVotes).to.equal(0)
   })
 
   it('should add new voter', async () => {
-    const votingInstance = await voting.new(['p1', 'p2'], 2, {
-      from: accounts[1],
-    })
+    const { voting } = await setup()
+    const [, secondAccount] = await ethers.getSigners()
 
-    await votingInstance.addVoter()
+    await voting.connect(secondAccount).addVoter()
 
-    const avaibleVotes = +(await votingInstance.getAvaibleVotes())
+    const avaibleVotes = +(await voting
+      .connect(secondAccount)
+      .getAvaibleVotes())
 
-    assert.equal(avaibleVotes, 2)
+    expect(avaibleVotes).to.equal(1)
   })
 })
