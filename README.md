@@ -1,7 +1,7 @@
 # Solidity Voting Contract
 
 [![CI](https://github.com/Mnigos/solidity-voting-contract/actions/workflows/main.yml/badge.svg)](https://github.com/Mnigos/solidity-voting-contract/actions/workflows/main.yml)
-[![codecov](https://codecov.io/gh/Mnigos/voting-www/branch/main/graph/badge.svg?token=aDHt8FbN5U)](https://codecov.io/gh/Mnigos/voting-www)
+[![codecov](https://codecov.io/gh/Mnigos/solidity-voting-contract/branch/main/graph/badge.svg?token=d0C6GbFlHC)](https://codecov.io/gh/Mnigos/solidity-voting-contract)
 
 ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 ![CodeCov](https://img.shields.io/badge/codecov-%23ff0077.svg?style=for-the-badge&logo=codecov&logoColor=white)
