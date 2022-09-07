@@ -16,9 +16,9 @@
     "generate-types": "hardhat typechain",
     "typecheck": "hardhat compile && yarn generate-types && tsc --noEmit",
     "postinstall": "yarn generate-types",
-    "test": "hardhat test",
-    "test:watch": "hardhat watch test",
-    "test:coverage": "hardhat coverage"
+    "test": "hardhat test --network hardhat",
+    "test:watch": "hardhat watch test --network hardhat",
+    "test:coverage": "hardhat coverage --network hardhat"
   },
   "lint-staged": {
     "*.sol": "solhint \"contracts/**/*.sol\" --fix && prettier --write \"contracts/**/*.sol\"",
