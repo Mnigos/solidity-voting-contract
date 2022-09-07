@@ -43,7 +43,7 @@ module.exports = {
     'plugin:sonarjs/recommended',
     'plugin:unicorn/recommended',
   ],
-  ignorePatterns: ['truffle-config.js'],
+  ignorePatterns: ['README.md'],
   overrides: [
     {
       files: ['**/migrations-ts/**/*.ts'],
