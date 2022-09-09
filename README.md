@@ -33,7 +33,9 @@
 
 Solidity Smart Contract for simple voting application.
 
-preview: https://voting-www.vercel.app
+Deploy on `Goerli`: https://goerli.etherscan.io/address/0x37354B24326911424cD0f3BB8a0D1C372C42F80A
+
+Goerli address: `0x37354B24326911424cD0f3BB8a0D1C372C42F80A`
 
 Other repositories:
 
